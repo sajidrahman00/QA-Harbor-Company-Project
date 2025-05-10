@@ -1,0 +1,46 @@
+import pytest
+from playwright.sync_api import sync_playwright
+from dotenv import load_dotenv
+import os
+
+# Load environment variables from .env file
+load_dotenv()
+
+@pytest.fixture(scope="session")
+def browser_type_launch_args():
+    """Return additional arguments for browser launch."""
+    return {
+        "headless": False,
+        "slow_mo": 100,
+    }
+
+@pytest.fixture(scope="session")
+def browser_context_args():
+    """Return additional arguments for browser context creation."""
+    return {
+        "viewport": {
+            "width": 1280,
+            "height": 720,
+        },
+        "ignore_https_errors": True,
+    }
+
+@pytest.fixture
+def context(browser):
+    """Create a new browser context with a screenshot path."""
+    context = browser.new_context(
+        record_video_dir="videos/",
+        record_har_path=None,
+    )
+    
+    # Set default navigation timeout
+    context.set_default_timeout(30000)
+    
+    yield context
+    context.close()
+
+@pytest.fixture
+def page(context):
+    """Create a new page in the browser context."""
+    page = context.new_page()
+    yield page

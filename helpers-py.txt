@@ -1,0 +1,44 @@
+import time
+import random
+import string
+import json
+import os
+from datetime import datetime
+from faker import Faker
+
+fake = Faker()
+
+def generate_random_email():
+    """Generate a random email address."""
+    timestamp = int(time.time())
+    return f"test{timestamp}@example.com"
+
+def generate_random_name():
+    """Generate a random name."""
+    return fake.name()
+
+def generate_random_password(length=12):
+    """Generate a random password."""
+    chars = string.ascii_letters + string.digits + string.punctuation
+    return ''.join(random.choice(chars) for _ in range(length))
+
+def generate_random_phone():
+    """Generate a random Bangladesh phone number."""
+    return f"017{''.join(random.choice(string.digits) for _ in range(8))}"
+
+def save_test_results(test_name, results):
+    """Save test results to a JSON file."""
+    if not os.path.exists("results"):
+        os.makedirs("results")
+    
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    filename = f"results/{test_name}_{timestamp}.json"
+    
+    with open(filename, 'w') as f:
+        json.dump(results, f, indent=2)
+    
+    return filename
+
+def wait_seconds(seconds):
+    """Wait for a specified number of seconds."""
+    time.sleep(seconds)

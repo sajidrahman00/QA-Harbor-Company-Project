@@ -1,0 +1,45 @@
+"""Test data for BD Jobs tests."""
+
+VALID_USER = {
+    "email": "test@example.com",
+    "password": "Password123!"
+}
+
+INVALID_USER = {
+    "email": "invalid@example.com",
+    "password": "wrongpassword"
+}
+
+NEW_USER = {
+    "name": "Test User",
+    "email": "newuser@example.com",
+    "password": "NewUser123!",
+    "confirm_password": "NewUser123!",
+    "mobile": "01700000000",
+    "gender": "M",
+    "accept_terms": True
+}
+
+SEARCH_TERMS = [
+    "Software Engineer",
+    "Project Manager",
+    "Marketing Executive",
+    "HR Manager",
+    "Data Analyst"
+]
+
+LOCATIONS = [
+    "Dhaka",
+    "Chittagong",
+    "Sylhet",
+    "Rajshahi",
+    "Khulna"
+]
+
+JOB_CATEGORIES = [
+    "IT/Telecommunication",
+    "Bank/Financial Institution",
+    "Marketing/Sales",
+    "NGO/Development",
+    "Engineering"
+]
